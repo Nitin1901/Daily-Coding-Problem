@@ -38,6 +38,23 @@ class Tree:
             print(node.value)
             self.printTree(node.right)
 
+    def printTreeInorder(self, node, c, n): 
+        if self.root == None: 
+            return 
+        else: 
+            if node == None or c[0] > n: 
+                return
+            self.printTreeInorder(node.left, c, n) 
+            c[0] += 1 
+            if c[0] == n: 
+                print(node.value)
+                return node.value
+            self.printTreeInorder(node.right, c, n) 
+                
+    def printTree(self, node, n): 
+        c = [0] 
+        self.printTreeInorder(node, c, n)
+
     def getMedian(self):
         if self.number == 0:
             return 0
@@ -45,9 +62,9 @@ class Tree:
             return self.root.value
         req = (self.number//2)
         if self.number%2 == 1:
-            return self.getValue(self.root, req+1)
+            return self.printTree(self.root, req+1)
         elif self.number%2 == 0:
-            return (self.getValue(self.root, req)+self.getValue(self.root, req+1))/2
+            return (self.printTree(self.root, req)+self.printTree(self.root, req+1))/2
 
 t = Tree()
 x = [2,1,5,7,2,0,5]
